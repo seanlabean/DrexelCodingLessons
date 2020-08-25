@@ -1,0 +1,64 @@
+Intro To Unix and the Unix Toolbox
+
+-Command History
+	-Up arrow
+-Ctrl-C
+	-Kill Running Process
+	-Infinite Loop Example
+-Tab Completion
+-List Directories
+	-ls
+	-ls -a => all, dont hide any files
+	-ls -l => Long listing format
+	-ls -ltar => Combine multiple flags, list, by time, all files, in reverse
+-Wildcards
+	* - Any sequence of characters
+	? - One character wildcard
+-Where am i?
+	-pwd - print current working directory
+-Changing Location
+	- cd <dir> - change directory
+	- cd and cd ~ - change to home directory
+	- cd .. - Go back one directory
+	- cd . - . => CUrrent working directory
+-Copy, Move, Delete
+	- touch <filename>
+	- cp <source> <destination>
+	- mv <source> <destination> - move or rename
+	- rm <file>
+	- ls first!
+	- -r flag => recursive, run command on directories also (careful not to delete everything)
+-Accessing a File
+	-cat <filename>
+	-more
+	-less -forwards and backwards and searching
+-Editing a file
+	-gedit - most like notepad
+	-emacs - a little awkward
+	-vim - useful when sshing in
+-Variables
+	- access with $
+	- echo
+-Redirection, pipes
+	- > - Redirect output to file
+	- >> - Append output to file
+	- < - Redirect input from file
+	- | - Pipe output of one program into another
+-Foreground, background
+	-Ctrl-Z, bg, fg, &
+-What programs are running
+	-ps
+	-ps -xf
+	-ps -auxf -List information about all processes most frequently, List only process data whose effective user ID number or login name is given in uidlist, Displays processes without a controlling terminal in addition to processes with a controlling terminal., Generates a full listing
+	-top
+	-kill
+-Locating a file
+	-locate, find
+-Searching Inside a file
+	-grep, -r
+-Remote Access
+	-ssh
+	-ssh -X
+	-PuTTY
+-File information
+	-file

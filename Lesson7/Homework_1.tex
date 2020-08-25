@@ -1,0 +1,494 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    
+\title{Nonlinear Dynamics}
+
+    
+    
+\author{Joshua Wall}
+
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+
+    \section{Nonlinear Dynamics Homework \#1}
+
+
+
+    \subparagraph{Problem \#1: Construct 10,000 random numbers and bin them in intervals
+of length 0.01. Plot the histogram of this.}
+
+
+    Okay, so Python has a nice in that the histogram command bins for us.
+But first I'll make 10,000 random numbers, using the best random number
+generator in Python. It makes random numbers based on the system CPU
+that are suitable for cryptography (see
+https://docs.python.org/2/library/os.html\#os.urandom for details). Note
+that the generator defaults to the range \([0,1)\). The best I can do to
+make it \((0,1)\) is to use my machince precision to get the edges
+right. Hopefully that's okay.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} \PY{n}{inline}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{rands} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}
+        
+        \PY{n}{foo} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{SystemRandom}\PY{p}{(}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{rands}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{foo}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{0}\PY{o}{+}\PY{n}{sys}\PY{o}{.}\PY{n}{float\PYZus{}info}\PY{o}{.}\PY{n}{epsilon}\PY{p}{,} \PY{l+m+mf}{1.0} \PY{o}{\PYZhy{}} \PY{n}{sys}\PY{o}{.}\PY{n}{float\PYZus{}info}\PY{o}{.}\PY{n}{epsilon}\PY{p}{)}
+            
+        \PY{k}{print} \PY{n}{rands}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 0.6090817   0.02900779  0.62646369 \ldots,  0.26555126  0.26411794
+  0.0120324 ]
+    \end{Verbatim}
+
+    Okay, this looks good. Now lets bin and histogram it using the command
+hist from pyplot. Note that I pass it the number of bins I want so that
+python will automatically make their width 0.01. Just to be sure, we'll
+print the bin sizes (which I call bins here) to check.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{histplot}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}    
+            
+            \PY{n}{font} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{family}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{monospace}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZsq{}}\PY{l+s}{weight}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{bold}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s}{\PYZsq{}}\PY{l+s}{size}\PY{l+s}{\PYZsq{}}   \PY{p}{:} \PY{l+m+mi}{18}\PY{p}{\PYZcb{}}
+        
+            \PY{n}{matplotlib}\PY{o}{.}\PY{n}{rc}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{font}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{font}\PY{p}{)}
+        
+            \PY{n}{num\PYZus{}bins} \PY{o}{=} \PY{l+m+mi}{10000}\PY{o}{*}\PY{l+m+mf}{0.01}   \PY{c}{\PYZsh{} Set the number of bins I want.}
+        
+            \PY{c}{\PYZsh{} Bin the data and plot the histogram. Note this function returns the binned data (measurement), the bins themselves (bins)}
+            \PY{c}{\PYZsh{} and the patches that python used to construct the histogram, which we don\PYZsq{}t care about here.}
+        
+            \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{80}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Histogram of binned numbers}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Bin value}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of numbers in bin}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{p}{[}\PY{n}{measurements}\PY{p}{,} \PY{n}{bins}\PY{p}{,} \PY{n}{patches}\PY{p}{]} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{n}{num\PYZus{}bins}\PY{p}{,} \PY{n+nb}{range}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{]}\PY{p}{)}
+        
+            \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{The number of bins is}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{num\PYZus{}bins}
+        
+            \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{The bins are:}\PY{l+s}{\PYZdq{}}
+        
+            \PY{k}{print} \PY{n}{bins}  \PY{c}{\PYZsh{} Check that the bin sizes are correct.}
+        
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{measurements}\PY{p}{,} \PY{n}{bins}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{p}{[}\PY{n}{measurements}\PY{p}{,} \PY{n}{bins}\PY{p}{]} \PY{o}{=} \PY{n}{histplot}\PY{p}{(}\PY{n}{rands}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The number of bins is 100.0
+The bins are:
+[ 0.    0.01  0.02  0.03  0.04  0.05  0.06  0.07  0.08  0.09  0.1   0.11
+  0.12  0.13  0.14  0.15  0.16  0.17  0.18  0.19  0.2   0.21  0.22  0.23
+  0.24  0.25  0.26  0.27  0.28  0.29  0.3   0.31  0.32  0.33  0.34  0.35
+  0.36  0.37  0.38  0.39  0.4   0.41  0.42  0.43  0.44  0.45  0.46  0.47
+  0.48  0.49  0.5   0.51  0.52  0.53  0.54  0.55  0.56  0.57  0.58  0.59
+  0.6   0.61  0.62  0.63  0.64  0.65  0.66  0.67  0.68  0.69  0.7   0.71
+  0.72  0.73  0.74  0.75  0.76  0.77  0.78  0.79  0.8   0.81  0.82  0.83
+  0.84  0.85  0.86  0.87  0.88  0.89  0.9   0.91  0.92  0.93  0.94  0.95
+  0.96  0.97  0.98  0.99  1.  ]
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework_1_files/Homework_1_7_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now for the Graduate Student part of this question. We would expect that
+the \# in any bin would be 10,000/num\_bins=100. To check this, we can
+calculate the \(\chi^2\) of this and see if any deviation from this is
+small or not. To calculate \(\chi^2\) we do:
+
+\begin{align} \chi^2 = \sum_i d_i^2/e_i \\ d_i = o_i - e_i \end{align}
+
+where \(e_i\) is each expected measurement, \(o_i\) is the actual
+measurement (here what the code returned) and \(d_i\) is the deviation
+of the actual observed measures from the expected measures. So doing
+this in the code enviroment:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{num\PYZus{}bins} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{expected} \PY{o}{=} \PY{l+m+mi}{10000}\PY{o}{/}\PY{n}{num\PYZus{}bins}
+         
+         \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{Your expected measurement is}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{expected}
+         
+         \PY{n}{deviations} \PY{o}{=} \PY{n}{measurements} \PY{o}{\PYZhy{}} \PY{n}{expected}
+         
+         \PY{n}{chi\PYZus{}2} \PY{o}{=} \PY{l+m+mf}{0.0}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{deviations}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{chi\PYZus{}2} \PY{o}{=} \PY{n}{chi\PYZus{}2} \PY{o}{+} \PY{n}{deviations}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{2.0}\PY{o}{/}\PY{n}{expected}
+             
+         \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{Your Chi\PYZca{}2 is}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{chi\PYZus{}2}
+         
+         \PY{n}{above90} \PY{o}{=} \PY{p}{(}\PY{n}{chi\PYZus{}2} \PY{o}{\PYZhy{}} \PY{l+m+mf}{117.407}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{117.407}
+         \PY{n}{above90} \PY{o}{=} \PY{l+m+mf}{0.90} \PY{o}{+} \PY{l+m+mf}{0.90}\PY{o}{*}\PY{n}{above90}
+         
+         \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{Your confidence level that the distribution is uniform is}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{above90}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Your expected measurement is 100
+Your Chi\^{}2 is 93.28
+Your confidence level that the distribution is uniform is 0.715051061691
+    \end{Verbatim}
+
+    The number of degrees of freedom here is the number of bins, 100, minus
+1 for the \(\chi^2\) test. Looking then at the table for a \(\chi^2\)
+distribution at NIST
+(http://www.itl.nist.gov/div898/handbook/eda/section3/eda3674.htm) I see
+for 99 degrees of freedom that this is a uniform distribution with an
+upper value of 117.407 for 90\% confidence and 123.225 for 95\%
+confidence. 95\% is the ``standard'' assumption about the accuracy of
+the measurements, but if you want to be safer even the 90\% confidence
+passes the \(\chi^2\) test. The noise is indeed random.
+
+
+    \subparagraph{Problem \#2 Construct 10,000 iterations of the standard logistic map
+\(x'= \lambda x(1-x)\) for \(x \in [0,1]\) with
+\(\ 3.7 \le lambda \le 4.0\) and bin them in intervals of 0.01. Plot the
+histogram of this.}
+
+
+    Okay, no problem. I pick \(\lambda=3.85\) to be right in the middle.
+First I'll define the function:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{k}{def} \PY{n+nf}{logistic}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{lam}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{x1} \PY{o}{=} \PY{n}{lam}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}
+             \PY{k}{return} \PY{n}{x1}
+\end{Verbatim}
+
+    Then we will run it on the same random number generator.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{x\PYZus{}prime} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}
+         \PY{n}{lamb} \PY{o}{=} \PY{l+m+mf}{3.85}
+         
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{x} \PY{o}{=} \PY{n}{foo}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{1.0} \PY{o}{+} \PY{n}{sys}\PY{o}{.}\PY{n}{float\PYZus{}info}\PY{o}{.}\PY{n}{epsilon}\PY{p}{)}
+             \PY{n}{x\PYZus{}prime}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{logistic}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{lamb}\PY{p}{)}
+             
+\end{Verbatim}
+
+    And then plot the histogram of the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{p}{[}\PY{n}{measurements}\PY{p}{,} \PY{n}{bins}\PY{p}{]} \PY{o}{=} \PY{n}{histplot}\PY{p}{(}\PY{n}{x\PYZus{}prime}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The number of bins is 100.0
+The bins are:
+[ 0.    0.01  0.02  0.03  0.04  0.05  0.06  0.07  0.08  0.09  0.1   0.11
+  0.12  0.13  0.14  0.15  0.16  0.17  0.18  0.19  0.2   0.21  0.22  0.23
+  0.24  0.25  0.26  0.27  0.28  0.29  0.3   0.31  0.32  0.33  0.34  0.35
+  0.36  0.37  0.38  0.39  0.4   0.41  0.42  0.43  0.44  0.45  0.46  0.47
+  0.48  0.49  0.5   0.51  0.52  0.53  0.54  0.55  0.56  0.57  0.58  0.59
+  0.6   0.61  0.62  0.63  0.64  0.65  0.66  0.67  0.68  0.69  0.7   0.71
+  0.72  0.73  0.74  0.75  0.76  0.77  0.78  0.79  0.8   0.81  0.82  0.83
+  0.84  0.85  0.86  0.87  0.88  0.89  0.9   0.91  0.92  0.93  0.94  0.95
+  0.96  0.97  0.98  0.99  1.  ]
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework_1_files/Homework_1_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Well that doesn't look very uniform. Lets look at the \(\chi^2\) of it.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{expected} \PY{o}{=} \PY{l+m+mi}{10000}\PY{o}{/}\PY{n}{num\PYZus{}bins}
+         
+         \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{Your expected measurement is}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{expected}
+         
+         \PY{n}{deviations} \PY{o}{=} \PY{n}{measurements} \PY{o}{\PYZhy{}} \PY{n}{expected}
+         
+         \PY{n}{chi\PYZus{}2} \PY{o}{=} \PY{l+m+mf}{0.0}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{deviations}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{chi\PYZus{}2} \PY{o}{=} \PY{n}{chi\PYZus{}2} \PY{o}{+} \PY{n}{deviations}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{2.0}\PY{o}{/}\PY{n}{expected}
+             
+         \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{Your Chi\PYZca{}2 is}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{chi\PYZus{}2}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Your expected measurement is 100.0
+Your Chi\^{}2 is 8054.92
+    \end{Verbatim}
+
+    Okay, the table value for a confidence level of 99.9\% is only 148.230.
+So that means we have to reject that this is a uniform
+distribution\ldots{} its way above that.
+
+
+    \subparagraph{Problem \#3: Construct the linear relation between the fold map of
+\(y'\) and the logistic map \(x'\) from above, and find \(a(\lambda)\),
+given that:}
+
+
+    \begin{align} \\ x'&=\lambda x(1-x) \\ y'&=a-y^2 \\ y&=mx+b \end{align}
+
+    Okay, lets write out \(y'\) and try to form \(x'\) from it with the
+linear relation between them:
+
+    \begin{align} \\ y'&=a-y^2 \\ mx'+b &= a - (mx +b)^2 \\ x' &= \frac{a}{m} - \frac{b}{m} - \frac{1}{m}(m^2x^2 + b^2 + 2mxb) \\
+&= \frac{a}{m} - \frac{b}{m} - \frac{b^2}{m} - mx\left(x+\frac{2b}{m} \right) \end{align}
+
+    Comparing this to the logistic map, we see the following relations must
+be true.
+
+    \begin{align} a &= b + b^2 \\ m &= -2b \\ m &= \lambda \end{align}
+
+    And using these relations we find that \(a(\lambda)\) must be:
+
+\begin{align} a(\lambda) = \frac{\lambda}{2}\left(\frac{\lambda}{2} - 1 \right) \end{align}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
