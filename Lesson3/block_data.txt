@@ -1,4 +1,4 @@
-#Month	Year	Money
+Month	Year	Money
 January	2014	10
 February	2014	15
 March	2014	16
