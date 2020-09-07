@@ -334,7 +334,7 @@ class NEURON:
 			elif k in ["lc", "long_c", "lcutoff", "long_cutoff"]:
 				long_cutoff = value
 			else:
-				print "Error. Option \'%s\' not found" % key
+				print("Error. Option \'%s\' not found")% key
 				return
 
 
@@ -357,7 +357,7 @@ class NEURON:
 
 				# If there is a connection i -> j
 				if numpy.abs(conn[i][j]) > 1.0e-8: 					
-					#counter = counter+1
+				        #counter = counter+1
 					# Creating & storing a synapse targeting the center of j
 					syn = self.__h.ExpSyn (0.5, sec = self.__neurons[j].soma[0])
 					self.__neurons[i].soma[0].push()
@@ -568,7 +568,7 @@ class NEURON:
 			if k in ['force', 'force_run']:
 				force_run = key[value]
 			else:
-				print "Error. Option \'%s\' not found" % key
+				print("Error. Option \'%s\' not found")% key
 				return
 
 
@@ -590,9 +590,9 @@ class NEURON:
 			self.__dist = None
 			self.__conn = None
 			import gc
-			print gc.collect()
+			print(gc.collect())
 
-			print "NEURON Order:", self.__h.secondorder
+			print("NEURON Order:", self.__h.secondorder)
 			self.__h.run()
 
 			self.__data.train = self.calc_spike_train()
