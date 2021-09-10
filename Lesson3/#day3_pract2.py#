@@ -1,4 +1,4 @@
-#Read the comma separated file 'numbers.cvs' and store the 1st and 4th column in a list
+#Read the comma separated file 'numbers.cvs' and store the 1st and 4th column inx a list
 
 import string
 
