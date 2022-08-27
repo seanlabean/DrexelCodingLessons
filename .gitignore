@@ -139,3 +139,9 @@ dmypy.json
 *.JPG
 
 #PDFS
+
+#TeX fluff
+*.aux
+*.log
+*.out
+*.synctex.gz
